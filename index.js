@@ -11,22 +11,11 @@ app.set("view engine", "ejs");
 
 // route handler
 app.get('/', async (req, res) => {
-    // axios.get("https://statsapi.web.nhl.com/api/v1/schedule", { headers: { Accept: 'application/json', 'Accept-Encoding': 'identity' }, params: { trophies: true } }).then(
-    //     (response) => {
-    //         var result = response.data.dates[0].games[0].teams;
-    //         // do logic here?
-    //         //res.render?
-    //         res.send(result)
-    //     },
-    //     (error) => {
-    //         console.log(error);
-    //     }
-    // );
     // DATA FROM LIVE GAMES. CAN YOU SAVE IT? BUT ONLY IF YOURE REPEATEDLY CALLING IT....
     // each time somebody comes to the website just update it to show the live game. guess cant really save it....
+    // on game day compare each teams stats? like maple leafs versus their opponent
     var response = await hockey.getUpcomingSchedule();
     var games = response.data.dates[0].games;
-    //res.send(games);
     res.render('test.ejs', {title:"NHL DATA",games:games});
 
 });

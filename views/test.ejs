@@ -1,10 +1,11 @@
 <h1><%= title %></h1>
 
+<h2>Today's Games</h2>
 <ul>
 
 <% for(var i=0; i<games.length; i++) {%>
 
-<li style="color:blueviolet;"><%= games[i].link %></li>
+<li style="color:blueviolet;"><%= games[i].teams.away.team.name %> @ <%= games[i].teams.home.team.name %></li>
 
 <% } %>
 
