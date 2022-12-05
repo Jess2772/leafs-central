@@ -17,6 +17,11 @@ app.get('/upcoming', async (req, res) => {
     // let user query by game, can see info for a specific game, pull the game data from mongodb and display (try for nice graphics).
     // upcoming schedule
     // record for a certain time period? add the entries to the database... but how would i know which entries have already been saved....
+    // add link for the games? but idk if thats allowed lmao
+    // page for leafs news?
+    // can have a dynamic endpoint that takes in a gameid, so all display games route to that one webpage?
+    // when searching for a game in database, will need to associate the game with a key, like key value pair in order to find the game
+    
     var response = await hockey.getUpcomingSchedule();
     var games = response.data.dates[0].games;
     var test = await hockey.getLeafsUpcomingSchedule();
