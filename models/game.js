@@ -14,7 +14,7 @@ const gameDetailsSchema = new Schema({
     away_scorers: [String]
 });
 
-module.exports = mongoose.model("Game", gameDetailsSchema);
+module.exports = mongoose.model("games202223", gameDetailsSchema);
 
 
 
