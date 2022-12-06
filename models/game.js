@@ -4,14 +4,18 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const gameDetailsSchema = new Schema({
-    _someId: Schema.Types.ObjectId,
+    game_id: {type: Number, required: true},
+    game_number: {type: Number, required: true},
     home_team: {type: String, required: true},
-    home_goals: {type: Number, required: true},
     away_team: {type: String, required: true},
-    away_goals: {type: Number, required: true},
     date: {type: Date, required: true},
+    overtime: {type: Boolean},
+    shootout: {type: Boolean},
     home_scorers: [String],
-    away_scorers: [String]
+    home_goalies: [{type: String, required:true}],
+    away_scorers: [String],
+    away_goalies: [{type: String, required:true}],
+    highlights: {type:String}
 });
 
 module.exports = mongoose.model("games202223", gameDetailsSchema);

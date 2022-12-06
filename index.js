@@ -27,13 +27,13 @@ app.get('/upcoming', async (req, res) => {
     // page for leafs news?
     // can have a dynamic endpoint that takes in a gameid, so all display games route to that one webpage?
     // when searching for a game in database, will need to associate the game with a key, like key value pair in order to find the game
-
+//
     var response = await hockey.getUpcomingSchedule();
     var games = response.data.dates[0].games;
     var test = await hockey.getLeafsUpcomingSchedule();
     res.render('games.ejs', {title:"NHL DATA",games:games});
 
-    const query = {"home_goals":3};
+    const query = {"home_goalies":{$size:2}}; // this is how to query based on size of array
     const gg = Game.find(query);
     const result1 = await gg.exec();
     console.log(result1)

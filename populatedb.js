@@ -11,8 +11,8 @@ var Game = require('./models/game')
 
 
 var games = []
-function gameCreate(home_team, home_goals, away_team, away_goals, date, cb) {
-    gameDetail = {home_team:home_team , home_goals: home_goals, away_team:away_team,away_goals:away_goals, date:date};
+function gameCreate(game_id, game_number, home_team, home_goals, away_team, away_goals, date, cb) {
+    gameDetail = {game_id:game_id,game_number:game_number, game_numergamehome_team:home_team , home_goals: home_goals, away_team:away_team,away_goals:away_goals, date:date};
 
     var game = new Game(gameDetail);
          
@@ -30,7 +30,7 @@ function gameCreate(home_team, home_goals, away_team, away_goals, date, cb) {
   function createGames(cb) {
     async.series([
         function(callback) {
-            gameCreate('Toronto Maple Leafs', 3, 'San Jose Sharks', 1, '2022-11-17', callback);
+            gameCreate(21, 1, 'Toronto Maple Leafs', 3, 'San Jose Sharks', 1, '2022-11-17', callback);
           }
     ],cb);
   }
