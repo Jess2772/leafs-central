@@ -9,7 +9,8 @@ mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
-const hockey = require('./logic/hockey');
+const nhl_service = require('./logic/nhlservice');
+const queries = require('./queries')
 const Game = require('./models/game');
 
 app.set("views", path.join(__dirname, "views"));
@@ -28,15 +29,22 @@ app.get('/upcoming', async (req, res) => {
     // can have a dynamic endpoint that takes in a gameid, so all display games route to that one webpage?
     // when searching for a game in database, will need to associate the game with a key, like key value pair in order to find the game
 //
-    var response = await hockey.getUpcomingSchedule();
+    var response = await nhl_service.getUpcomingSchedule();
     var games = response.data.dates[0].games;
-    var test = await hockey.getLeafsUpcomingSchedule();
+    var test = await nhl_service.getLeafsUpcomingSchedule();
     res.render('games.ejs', {title:"NHL DATA",games:games});
+    queries.findGameById(2022020348);
 
-    const query = {"home_goalies":{$size:2}}; // this is how to query based on size of array
-    const gg = Game.find(query);
-    const result1 = await gg.exec();
-    console.log(result1)
+    var response = await nhl_service.findBoxScoreByGameId(2022020348);
+    var t = response.data.teams.away.team.name;
+    var g = response.data.teams.away.teamStats;
+    var t1 = response.data.teams.home.team.name;
+    var g1 = response.data.teams.home.teamStats;
+    // console.log(t);
+    // console.log(g);
+    // console.log(t1);
+    // console.log(g1);
+    
     
 });
 
