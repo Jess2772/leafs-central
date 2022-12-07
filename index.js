@@ -37,6 +37,8 @@ app.get('/home', async (req, res) => {
 
     var divisionStanding = await nhl_service.getStandingInAtlantic();
 
+    var isGameDay = await nhl_service.isGameDay();
+
     var currentDate = new Date();
     currentDate = nhl_service.formatDate(currentDate)
 
@@ -46,7 +48,8 @@ app.get('/home', async (req, res) => {
             teamStatsRanking:teamStatsRanking,
             upcomingGames: upcomingGames,
             currentDate: currentDate,
-            divisionStanding: divisionStanding
+            divisionStanding: divisionStanding,
+            isGameDay: isGameDay
         }
     );
     // could pass in is game day

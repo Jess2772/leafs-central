@@ -5,6 +5,8 @@
 
 <h2 align="center">Team Statistics</h2>
 
+<h2 align="center">in division standings can see current streak (like win streak), goals for, goals against, is there a better way of finding that information?</h2>
+
 <div class="container" align="center">
     <body>
         <p style="color:blue;"> (<%= teamStats.wins %>-<%= teamStats.losses %>-<%= teamStats.ot %>)</p>
@@ -41,7 +43,7 @@
 </div>
 
 <div align="center">
-    <% if (upcomingGames.length > 0 && upcomingGames[0].date === currentDate) { %>
+    <% if (isGameDay) { %>
         
         <p> Game Day! </p>
         <p> Display a container about todays game </p>
@@ -53,7 +55,7 @@
             <p> Game is live!</p>
         <% } %>
     <%} else if (upcomingGames.length > 0) { %>
-        <p> Got games in the next week </p>
+        <p> No game today, but got games in the upcoming week </p>
     <% } %>
 </div>
 

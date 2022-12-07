@@ -66,6 +66,24 @@ async function getStandingInAtlantic() {
   }
 }
 
+async function isGameDay() {
+  var SCHEDULE_ENDPOINT = 'https://statsapi.web.nhl.com/api/v1/schedule';
+  var currentDate = new Date();
+  currentDate = formatDate(currentDate)
+
+  var rsp = await axios.get(
+    SCHEDULE_ENDPOINT, 
+      { 
+        headers: { Accept: 'application/json', 'Accept-Encoding': 'identity' }, 
+        params: { trophies: true, teamId: 10, date: currentDate } 
+      }
+  );
+  if (rsp.data.totalItems == 1) {
+    return true;
+  }
+  return false;
+}
+
 
 function padTo2Digits(num) {
   return num.toString().padStart(2, '0');
@@ -92,6 +110,7 @@ function formatDate(date) {
     findBoxScoreByGameId,
     findUpcomingGames,
     getStandingInAtlantic,
+    isGameDay,
     formatDate,
     padTo2Digits
   }
