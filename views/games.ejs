@@ -38,4 +38,28 @@
 
 </div>
 
+<div align="center">
+    <% if (upcomingGames.length > 0 && upcomingGames[0].date === currentDate) { %>
+        <p> Game Day! </p>
+        <% if (upcomingGames[0].games[0].status.abstractGameState === "Preview") { %>
+            <p> Display a container about todays game </p>
+            <p> Pre-Game </p>
+        <% } else if (upcomingGames[0].games[0].status.abstractGameState === "Live") { %>
+            <p> Game is live!</p>
+        <% } %>
+    <%} else { %>
+        <p> No upcoming games :() </p>
+    <% } %>
+</div>
+
+
+<div align="center">
+    <h2>Upcoming Games:</h2>
+    <% for(var i=0; i<upcomingGames.length; i++) {%>
+        <%# can define a template for an upcoming game and pass in the fields you need: include('user/show', {user: user}); %>
+        <li style="color:blueviolet;"><%= upcomingGames[i].games[0].venue.name%> </li>
+        
+    <% } %>
+</div>
+
 <%- include('../views/footer') %>

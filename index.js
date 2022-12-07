@@ -29,13 +29,25 @@ app.get('/home', async (req, res) => {
     // can have a dynamic endpoint that takes in a gameid, so all display games route to that one webpage?
     // when searching for a game in database, will need to associate the game with a key, like key value pair in order to find the game
 //
-    var response = await nhl_service.getTeamStats(10);  
-    var teamStats = response.data.stats[0].splits[0].stat;
-    var teamStatsRanking = response.data.stats[1].splits[0].stat;
-    console.log(teamStats);
-    res.render('games.ejs', {title:"Toronto Maple Leafs",teamStats:teamStats, teamStatsRanking:teamStatsRanking});
-    var r = await nhl_service.findUpcomingGames();
-    console.log(s);
+    var teamStatsResponse = await nhl_service.getTeamStats(10);  
+    var teamStats = teamStatsResponse.data.stats[0].splits[0].stat;
+    var teamStatsRanking = teamStatsResponse.data.stats[1].splits[0].stat;
+
+    var upcomingGamesResponse = await nhl_service.findUpcomingGames();
+    var upcomingGames = upcomingGamesResponse.data.dates
+
+    var currentDate = new Date();
+    currentDate = nhl_service.formatDate(currentDate)
+
+    res.render('games.ejs', {
+            title: "Toronto Maple Leafs",
+            teamStats: teamStats, 
+            teamStatsRanking:teamStatsRanking,
+            upcomingGames: upcomingGames,
+            currentDate: currentDate
+        }
+    );
+    
 
 });
 

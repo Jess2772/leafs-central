@@ -19,16 +19,14 @@ async function findBoxScoreByGameId(game_id) {
 
 async function findUpcomingGames() {
   var SEVEN_DAYS = 7;
-  var SCHEDULE_ENDPOINT = `https://statsapi.web.nhl.com/api/v1/schedule`;
+  var SCHEDULE_ENDPOINT = 'https://statsapi.web.nhl.com/api/v1/schedule';
   var currentDate = new Date();
   var oneWeekLater = new Date();
 
   oneWeekLater.setDate(currentDate.getDate() + SEVEN_DAYS);
-  currentDate = currentDate.toISOString().substring(0,10);
-  oneWeekLater = oneWeekLater.toISOString().substring(0,10);
-
+  currentDate = formatDate(currentDate)
   console.log(currentDate);
-  console.log(oneWeekLater);
+  oneWeekLater = formatDate(oneWeekLater)
 
   return await axios.get(
     SCHEDULE_ENDPOINT, 
@@ -46,6 +44,22 @@ async function findUpcomingGames() {
 }
 
 
+function padTo2Digits(num) {
+  return num.toString().padStart(2, '0');
+}
+
+function formatDate(date) {
+  return (
+    [
+      date.getFullYear(),
+      padTo2Digits(date.getMonth() + 1),
+      padTo2Digits(date.getDate()),
+    ].join('-')
+  );
+}
+
+
+
 // save all important data from a game into database, let the user query?
 
 
@@ -55,5 +69,7 @@ async function findUpcomingGames() {
     getTeamStats,
     getLeafsUpcomingSchedule,
     findBoxScoreByGameId,
-    findUpcomingGames
+    findUpcomingGames,
+    formatDate,
+    padTo2Digits
   }
