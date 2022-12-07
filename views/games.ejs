@@ -1,6 +1,8 @@
 <%- include('../views/head') %>
 <h1 align="center"><%= title %></h1>
 
+<p align="center"><%= divisionStanding %> in Atlantic</p>
+
 <h2 align="center">Team Statistics</h2>
 
 <div class="container" align="center">
@@ -40,15 +42,18 @@
 
 <div align="center">
     <% if (upcomingGames.length > 0 && upcomingGames[0].date === currentDate) { %>
+        
         <p> Game Day! </p>
-        <% if (upcomingGames[0].games[0].status.abstractGameState === "Preview") { %>
-            <p> Display a container about todays game </p>
-            <p> Pre-Game </p>
+        <p> Display a container about todays game </p>
+        <p> If the game is over but its the same day still can show GAME OVER </p>
+        <% if (upcomingGames[0].games[0].status.abstractGameState === "Final") { %>
+            
+            <p> Final </p>
         <% } else if (upcomingGames[0].games[0].status.abstractGameState === "Live") { %>
             <p> Game is live!</p>
         <% } %>
-    <%} else { %>
-        <p> No upcoming games :() </p>
+    <%} else if (upcomingGames.length > 0) { %>
+        <p> Got games in the next week </p>
     <% } %>
 </div>
 

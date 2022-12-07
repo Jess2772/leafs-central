@@ -30,11 +30,12 @@ app.get('/home', async (req, res) => {
     // when searching for a game in database, will need to associate the game with a key, like key value pair in order to find the game
 //
     var teamStatsResponse = await nhl_service.getTeamStats(10);  
-    var teamStats = teamStatsResponse.data.stats[0].splits[0].stat;
-    var teamStatsRanking = teamStatsResponse.data.stats[1].splits[0].stat;
+    var teamStats = teamStatsResponse.stats[0].splits[0].stat;
+    var teamStatsRanking = teamStatsResponse.stats[1].splits[0].stat;
 
-    var upcomingGamesResponse = await nhl_service.findUpcomingGames();
-    var upcomingGames = upcomingGamesResponse.data.dates
+    var upcomingGames = await nhl_service.findUpcomingGames();
+
+    var divisionStanding = await nhl_service.getStandingInAtlantic();
 
     var currentDate = new Date();
     currentDate = nhl_service.formatDate(currentDate)
@@ -44,9 +45,11 @@ app.get('/home', async (req, res) => {
             teamStats: teamStats, 
             teamStatsRanking:teamStatsRanking,
             upcomingGames: upcomingGames,
-            currentDate: currentDate
+            currentDate: currentDate,
+            divisionStanding: divisionStanding
         }
     );
+    // could pass in is game day
     
 
 });
