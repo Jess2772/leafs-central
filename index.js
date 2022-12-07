@@ -17,7 +17,7 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
 // route handler
-app.get('/upcoming', async (req, res) => {
+app.get('/home', async (req, res) => {
     // DATA FROM LIVE GAMES. CAN YOU SAVE IT? BUT ONLY IF YOURE REPEATEDLY CALLING IT....
     // each time somebody comes to the website just update it to show the live game. guess cant really save it....
     // on game day compare each teams stats? like maple leafs versus their opponent
@@ -29,28 +29,19 @@ app.get('/upcoming', async (req, res) => {
     // can have a dynamic endpoint that takes in a gameid, so all display games route to that one webpage?
     // when searching for a game in database, will need to associate the game with a key, like key value pair in order to find the game
 //
-    var response = await nhl_service.getUpcomingSchedule();
-    var games = response.data.dates[0].games;
-    var test = await nhl_service.getLeafsUpcomingSchedule();
-    res.render('games.ejs', {title:"NHL DATA",games:games});
-    queries.findGameById(2022020348);
+    var response = await nhl_service.getTeamStats(10);  
+    var teamStats = response.data.stats[0].splits[0].stat;
+    var teamStatsRanking = response.data.stats[1].splits[0].stat;
+    console.log(teamStats);
+    res.render('games.ejs', {title:"Toronto Maple Leafs",teamStats:teamStats, teamStatsRanking:teamStatsRanking});
+    var r = await nhl_service.findUpcomingGames();
+    console.log(s);
 
-    var response = await nhl_service.findBoxScoreByGameId(2022020348);
-    var t = response.data.teams.away.team.name;
-    var g = response.data.teams.away.teamStats;
-    var t1 = response.data.teams.home.team.name;
-    var g1 = response.data.teams.home.teamStats;
-    // console.log(t);
-    // console.log(g);
-    // console.log(t1);
-    // console.log(g1);
-    
-    
 });
 
 app.get('/team/:id', async (req, res) => {
     var teamId = req.params.id;
-    var teamStats = await hockey.getTeamStats(teamId);
+    var teamStats = await nhl_service.getTeamStats(teamId);
     res.render('teamStats.ejs', {title:"TEAM STATS/STANDINGS",teamStats:teamStats});
 
 });

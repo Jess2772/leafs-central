@@ -1,12 +1,41 @@
-<h1><%= title %></h1>
+<%- include('../views/head') %>
+<h1 align="center"><%= title %></h1>
 
-<h2>Today's Games</h2>
-<ul>
+<h2 align="center">Team Statistics</h2>
 
-<% for(var i=0; i<games.length; i++) {%>
+<div class="container" align="center">
+    <body>
+        <p style="color:blue;"> (<%= teamStats.wins %>-<%= teamStats.losses %>-<%= teamStats.ot %>)</p>
+    </body>
 
-<li style="color:blueviolet;"><%= games[i].teams.away.team.name %> @ <%= games[i].teams.home.team.name %></li>
+    <body>
+        <p style="color:blue;"> Goals Per Game: <%= teamStats.goalsPerGame.toFixed(2) %> <span style="color:red;">(<%= teamStatsRanking.goalsPerGame %>)</span></p>
+    </body>
 
-<% } %>
+    <body>
+        <p style="color:blue;"> Goals Against Per Game: <%= teamStats.goalsAgainstPerGame.toFixed(2) %> <span style="color:red;">(<%= teamStatsRanking.goalsAgainstPerGame %>)</span></p>
+    </body>
 
-</ul>
+    <body>
+        <p style="color:blue;"> Power Play Percentage: <%= teamStats.powerPlayPercentage %>% <span style="color:red;">(<%= teamStatsRanking.powerPlayPercentage %>)</span></p>
+    </body>
+
+    <body>
+        <p style="color:blue;"> Penalty Kill Percentage: <%= teamStats.penaltyKillPercentage %>% <span style="color:red;">(<%= teamStatsRanking.penaltyKillPercentage %>)</span></p>
+    </body>
+
+    <body>
+        <p style="color:blue;"> Shots Per Game: <%= teamStats.shotsPerGame.toFixed(2) %> <span style="color:red;">(<%= teamStatsRanking.shotsPerGame %>)</span></p>
+    </body>
+
+    <body>
+        <p style="color:blue;"> Shots Allowed Per Game: <%= teamStats.shotsAllowed.toFixed(2) %> <span style="color:red;">(<%= teamStatsRanking.shotsAllowed %>)</span></p>
+    </body>
+
+    <body>
+        <p style="color:blue;"> Faceoff Win Percentage: <%= teamStats.faceOffWinPercentage %>% <span style="color:red;">(<%= teamStatsRanking.faceOffWinPercentage %>)</span></p>
+    </body>
+
+</div>
+
+<%- include('../views/footer') %>
