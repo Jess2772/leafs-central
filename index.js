@@ -35,7 +35,7 @@ app.get('/home', async (req, res) => {
 
     var upcomingGames = await nhl_service.findUpcomingGames();
 
-    var divisionStanding = await nhl_service.getStandingInAtlantic();
+    var standingStats = await nhl_service.getStandingStats();
 
     var isGameDay = await nhl_service.isGameDay();
 
@@ -48,7 +48,7 @@ app.get('/home', async (req, res) => {
             teamStatsRanking:teamStatsRanking,
             upcomingGames: upcomingGames,
             currentDate: currentDate,
-            divisionStanding: divisionStanding,
+            standingStats: standingStats,
             isGameDay: isGameDay
         }
     );

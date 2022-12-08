@@ -47,7 +47,7 @@ async function findUpcomingGames() {
 
 }
 
-async function getStandingInAtlantic() {
+async function getStandingStats() {
   var NUMBER_TEAMS_ATLANTIC = 8;
   var STANDINGS_ENDPOINT = 'https://statsapi.web.nhl.com/api/v1/standings/byDivision';
   var test = await axios.get(
@@ -58,10 +58,13 @@ async function getStandingInAtlantic() {
       }
   )
   var atlanticStanding = test.data.records[1];
+  var rsp = {}
   for (let i = 0; i < NUMBER_TEAMS_ATLANTIC; i++) {
     if (atlanticStanding.teamRecords[i].team.id == 10) {
       var rank = moment.localeData().ordinal(i + 1)
-      return rank;
+      rsp["rank"] = rank;
+      rsp["streak"] = atlanticStanding.teamRecords[i].streak.streakCode;
+      return rsp;
     }
   }
 }
@@ -109,7 +112,7 @@ function formatDate(date) {
     getTeamStats,
     findBoxScoreByGameId,
     findUpcomingGames,
-    getStandingInAtlantic,
+    getStandingStats,
     isGameDay,
     formatDate,
     padTo2Digits
