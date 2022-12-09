@@ -61,14 +61,29 @@
     <% } %>
 </div>
 
-
-<div align="center">
-    <h2>Upcoming Games:</h2>
-    <% for(var i=0; i<upcomingGames.length; i++) {%>
-        <%# can define a template for an upcoming game and pass in the fields you need: include('user/show', {user: user}); %>
-        <li style="color:blueviolet;"><%= upcomingGames[i].games[0].venue.name%> </li>
-        
-    <% } %>
+<div class="container d-flex justify-content-center">
+    <div class="row text-center">
+        <h2>Upcoming Games:</h2>
+        <% for(var i=0; i<upcomingGames.length; i++) {%>
+            <%# can define a template for an upcoming game and pass in the fields you need: include('user/show', {user: user}); %>
+            <div class="col-sm-3">
+                <div class="card border-primary" style="width: 18rem;">
+                    <div class="card-body">
+                        <% if (upcomingGames[i].games[0].teams.away.team.id == 10) {%>
+                            <h5 class="card-title">@ <%= upcomingGames[i].games[0].teams.home.team.name%></h5>
+                        <% } else {%>
+                            <h5 class="card-title">vs <%= upcomingGames[i].games[0].teams.away.team.name%></h5>
+                        <% } %>
+                        <p class="card-text"><%= upcomingGames[i].date%></p>
+                        <p class="card-text">Arena: <%= upcomingGames[i].games[0].venue.name%></p>
+                        <a href="#" class="btn btn-primary">Preview</a>
+                    </div>
+                </div>
+            </div>
+            
+        <% } %>
+    </div>
 </div>
+
 
 <%- include('../views/footer') %>
