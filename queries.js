@@ -8,8 +8,16 @@ async function findGameById(game_id) {
 
 }
 
+async function findAllPlayedGames() {
+    var entries = Game.find();
+    var result = await entries.exec();
+
+    return result;
+}
+
 
 
 module.exports = {
-    findGameById
+    findGameById,
+    findAllPlayedGames
 }

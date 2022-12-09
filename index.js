@@ -64,6 +64,13 @@ app.get('/team/:id', async (req, res) => {
 
 });
 
+app.get('/pastGames', async (req, res) => {
+    var pastGames = await queries.findAllPlayedGames();
+    console.log(pastGames);
+    res.render('pastGames.ejs', {title:"Past Games", pastGames:pastGames});
+
+});
+
 
 const port = process.env.PORT || 8081;
 app.listen(port, () => console.log(`Listening on port ${port}`))

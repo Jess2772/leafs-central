@@ -27,20 +27,20 @@ async function findBoxScoreByGameId(game_id) {
 }
 
 async function findUpcomingGames() {
-  var SEVEN_DAYS = 7;
+  var TWO_WEEKS = 14;
   var SCHEDULE_ENDPOINT = 'https://statsapi.web.nhl.com/api/v1/schedule';
   var currentDate = new Date();
-  var oneWeekLater = new Date();
+  var twoWeeksLater = new Date();
 
-  oneWeekLater.setDate(currentDate.getDate() + SEVEN_DAYS);
+  twoWeeksLater.setDate(currentDate.getDate() + TWO_WEEKS);
   currentDate = formatDate(currentDate)
-  oneWeekLater = formatDate(oneWeekLater)
+  twoWeeksLater = formatDate(twoWeeksLater)
 
   var rsp = await axios.get(
     SCHEDULE_ENDPOINT, 
       { 
         headers: { Accept: 'application/json', 'Accept-Encoding': 'identity' }, 
-        params: { trophies: true, teamId: 10, startDate: currentDate, endDate: oneWeekLater } 
+        params: { trophies: true, teamId: 10, startDate: currentDate, endDate: twoWeeksLater } 
       }
   );
   return rsp.data.dates

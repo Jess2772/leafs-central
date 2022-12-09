@@ -62,11 +62,11 @@
 </div>
 
 <div class="container d-flex justify-content-center">
-    <div class="row text-center">
+    <div class="row text-center" style="width: 100%;">
         <h2>Upcoming Games:</h2>
-        <% for(var i=0; i<upcomingGames.length; i++) {%>
+        <% for(var i=0; i<4; i++) {%>
             <%# can define a template for an upcoming game and pass in the fields you need: include('user/show', {user: user}); %>
-            <div class="col-sm-3">
+            <div class="col-sm-3 d-flex align-items-stretch">
                 <div class="card border-primary" style="width: 18rem;">
                     <div class="card-body">
                         <% if (upcomingGames[i].games[0].teams.away.team.id == 10) {%>
