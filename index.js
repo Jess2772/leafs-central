@@ -16,6 +16,8 @@ const Game = require('./models/game');
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
+app.use(express.static(__dirname+'/public'));
+
 // route handler
 app.get('/home', async (req, res) => {
     // DATA FROM LIVE GAMES. CAN YOU SAVE IT? BUT ONLY IF YOURE REPEATEDLY CALLING IT....
@@ -42,6 +44,15 @@ app.get('/home', async (req, res) => {
     var currentDate = new Date();
     currentDate = nhl_service.formatDate(currentDate)
 
+    var test = {
+        "Anaheim Ducks": "ducks",
+        "Calgary Flames": "flames",
+        "New York Rangers": "rangers",
+        "Pittsburgh Penguins": "penguins",
+        "Washington Capitals": "capitals"
+        
+    }
+
     res.render('games.ejs', {
             title: "Toronto Maple Leafs",
             teamStats: teamStats, 
@@ -49,7 +60,8 @@ app.get('/home', async (req, res) => {
             upcomingGames: upcomingGames,
             currentDate: currentDate,
             standingStats: standingStats,
-            isGameDay: isGameDay
+            isGameDay: isGameDay,
+            test: test
         }
     );
     // could pass in is game day

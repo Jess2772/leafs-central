@@ -1,18 +1,13 @@
 <%- include('../views/head') %>
 <h1 align="center"><%= title %></h1>
 
-<p align="center"><%= standingStats["rank"] %> in Atlantic</p>
+<p class="text-muted" align="center"><%= teamStats.wins %>-<%= teamStats.losses %>-<%= teamStats.ot %> • <%= standingStats["rank"] %> in Atlantic Division</p>
 
 <p align="center">Current streak: <%= standingStats["streak"] %></p>
 
 <h2 align="center">Team Statistics</h2>
 
-<h2 align="center">in division standings can see current streak (like win streak), goals for, goals against, is there a better way of finding that information?</h2>
-
 <div class="container" align="center">
-    <body>
-        <p style="color:blue;"> (<%= teamStats.wins %>-<%= teamStats.losses %>-<%= teamStats.ot %>)</p>
-    </body>
 
     <body>
         <p style="color:blue;"> Goals Per Game: <%= teamStats.goalsPerGame.toFixed(2) %> <span style="color:red;">(<%= teamStatsRanking.goalsPerGame %>)</span></p>
@@ -51,37 +46,50 @@
         <p> Display a container about todays game </p>
         <p> If the game is over but its the same day still can show GAME OVER </p>
         <% if (upcomingGames[0].games[0].status.abstractGameState === "Final") { %>
-            
             <p> Final </p>
         <% } else if (upcomingGames[0].games[0].status.abstractGameState === "Live") { %>
             <p> Game is live!</p>
         <% } %>
-    <%} else if (upcomingGames.length > 0) { %>
-        <p> No game today, but got games in the upcoming week </p>
     <% } %>
 </div>
 
+<h2 align="center" style="margin-bottom: 2.5rem;">Upcoming Games:</h2>
+
 <div class="container d-flex justify-content-center">
     <div class="row text-center" style="width: 100%;">
-        <h2>Upcoming Games:</h2>
         <% for(var i=0; i<4; i++) {%>
             <%# can define a template for an upcoming game and pass in the fields you need: include('user/show', {user: user}); %>
             <div class="col-sm-3 d-flex align-items-stretch">
-                <div class="card border-primary" style="width: 18rem;">
+                <div class="card bg-light border-secondary" style="height:18rem;">
+                    <div class="card-header">
+                        <%= new Date(upcomingGames[i].date).toUTCString().substring(0,17)%>
+                    </div>
                     <div class="card-body">
                         <% if (upcomingGames[i].games[0].teams.away.team.id == 10) {%>
-                            <h5 class="card-title">@ <%= upcomingGames[i].games[0].teams.home.team.name%></h5>
+                            <img class="card-img-top" style="max-width:35%; max-height: 40%" src="/img/<%=test[upcomingGames[i].games[0].teams.home.team.name]%>.png" alt="Card image">
+                            <div>
+                                <h5 class="card-title">@ </h5>
+                                <h5 class="card-title"><%= upcomingGames[i].games[0].teams.home.team.name%></h5>
+                                <p class="text-muted"> (<%=upcomingGames[i].games[0].teams.home.leagueRecord.wins%> -  <%=upcomingGames[i].games[0].teams.home.leagueRecord.losses%> - <%=upcomingGames[i].games[0].teams.home.leagueRecord.ot%>) </p>
+                            </div>
+                            
                         <% } else {%>
-                            <h5 class="card-title">vs <%= upcomingGames[i].games[0].teams.away.team.name%></h5>
+                            <img class="card-img-top" style="max-width:35%; max-height: 40%" src="/img/<%=test[upcomingGames[i].games[0].teams.away.team.name]%>.png" alt="Card image" style="width:100%">
+                            <div>
+                                <h5 class="card-title">vs </h5>
+                                <h5 class="card-title"><%= upcomingGames[i].games[0].teams.away.team.name%></h5>
+                                <p class="text-muted"> (<%=upcomingGames[i].games[0].teams.away.leagueRecord.wins%> -  <%=upcomingGames[i].games[0].teams.away.leagueRecord.losses%> - <%=upcomingGames[i].games[0].teams.away.leagueRecord.ot%>) </p>
+                            </div>
                         <% } %>
-                        <p class="card-text"><%= upcomingGames[i].date%></p>
-                        <p class="card-text">Arena: <%= upcomingGames[i].games[0].venue.name%></p>
-                        <a href="#" class="btn btn-primary">Preview</a>
+                    </div>
+                    <div class="card-footer text-muted" style="position:absolute; bottom:0; width:100%">
+                        <%= upcomingGames[i].games[0].venue.name%>
                     </div>
                 </div>
             </div>
             
         <% } %>
+        <p>Hover on a game preview and it opens up a new page with a preview of the game? pass in the gameid, or the teamids to search up their stats. send a request to an endpoint passing in values in the request body?</p>
     </div>
 </div>
 
