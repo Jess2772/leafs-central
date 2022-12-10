@@ -18,19 +18,46 @@ app.set("view engine", "ejs");
 
 app.use(express.static(__dirname+'/public'));
 
+var teamLogos = {
+    "Anaheim Ducks": "ducks",
+    "Arizona Coyotes": "coyotes",
+    "Boston Bruins": "bruins",
+    "Buffalo Sabres": "sabres",
+    "Calgary Flames": "flames",
+    "Carolina Hurricanes": "hurricanes",
+    "Chicago Blackhawks": "blackhawks",
+    "Dallas Stars": "stars",
+    "Detroit Red Wings": "redwings",
+    "Edmonton Oilers": "oilers",
+    "Vegas Golden Knights": "goldenknights",
+    "Los Angeles Kings": "kings",
+    "Montreal Canadiens": "canadiens",
+    "New Jersey Devils": "devils",
+    "New York Islanders": "islanders",
+    "New York Rangers": "rangers",
+    "Minnesota Wild": "wild",
+    "Ottawa Senators": "senators",
+    "Philadelphia Flyers": "flyers",
+    "Pittsburgh Penguins": "penguins",
+    "San Jose Sharks": "sharks",
+    "Seattle Kraken": "kraken",
+    "St. Louis Blues": "blues",
+    "Tampa Bay Lightning": "lightning",
+    "Vancouver Canucks": "canucks",
+    "Washington Capitals": "capitals",
+    "Winnipeg Jets": "jets"
+}
+
 // route handler
 app.get('/home', async (req, res) => {
     // DATA FROM LIVE GAMES. CAN YOU SAVE IT? BUT ONLY IF YOURE REPEATEDLY CALLING IT....
     // each time somebody comes to the website just update it to show the live game. guess cant really save it....
     // on game day compare each teams stats? like maple leafs versus their opponent
     // let user query by game, can see info for a specific game, pull the game data from mongodb and display (try for nice graphics).
-    // upcoming schedule
-    // record for a certain time period? add the entries to the database... but how would i know which entries have already been saved....
-    // add link for the games? but idk if thats allowed lmao
     // page for leafs news?
     // can have a dynamic endpoint that takes in a gameid, so all display games route to that one webpage?
     // when searching for a game in database, will need to associate the game with a key, like key value pair in order to find the game
-//
+
     var teamStatsResponse = await nhl_service.getTeamStats(10);  
     var teamStats = teamStatsResponse.stats[0].splits[0].stat;
     var teamStatsRanking = teamStatsResponse.stats[1].splits[0].stat;
@@ -44,15 +71,6 @@ app.get('/home', async (req, res) => {
     var currentDate = new Date();
     currentDate = nhl_service.formatDate(currentDate)
 
-    var test = {
-        "Anaheim Ducks": "ducks",
-        "Calgary Flames": "flames",
-        "New York Rangers": "rangers",
-        "Pittsburgh Penguins": "penguins",
-        "Washington Capitals": "capitals"
-        
-    }
-
     res.render('games.ejs', {
             title: "Toronto Maple Leafs",
             teamStats: teamStats, 
@@ -61,10 +79,9 @@ app.get('/home', async (req, res) => {
             currentDate: currentDate,
             standingStats: standingStats,
             isGameDay: isGameDay,
-            test: test
+            teamLogos: teamLogos
         }
     );
-    // could pass in is game day
     
 
 });
@@ -78,9 +95,12 @@ app.get('/team/:id', async (req, res) => {
 
 app.get('/pastGames', async (req, res) => {
     var pastGames = await queries.findAllPlayedGames();
-    console.log(pastGames);
-    res.render('pastGames.ejs', {title:"Past Games", pastGames:pastGames});
-
+    res.render('pastGames.ejs', {
+            title:"Past Games", 
+            pastGames:pastGames,
+            teamLogos: teamLogos
+        }
+    );
 });
 
 
