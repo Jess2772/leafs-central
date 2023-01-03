@@ -49,7 +49,7 @@ var teamLogos = {
 }
 
 // route handler
-app.get('/home', async (req, res) => {
+app.get('/', async (req, res) => {
     // DATA FROM LIVE GAMES. CAN YOU SAVE IT? BUT ONLY IF YOURE REPEATEDLY CALLING IT....
     // each time somebody comes to the website just update it to show the live game. guess cant really save it....
     // on game day compare each teams stats? like maple leafs versus their opponent
