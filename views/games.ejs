@@ -40,11 +40,8 @@
 </div>
 
 <div align="center">
-    <% if (isGameDay) { %>
-        
+    <% if (isGameDay) { %> 
         <p> Game Day! </p>
-        <p> Display a container about todays game </p>
-        <p> If the game is over but its the same day still can show GAME OVER </p>
         <% if (upcomingGames[0].games[0].status.abstractGameState === "Final") { %>
             <p> Final </p>
         <% } else if (upcomingGames[0].games[0].status.abstractGameState === "Live") { %>
