@@ -1,62 +1,64 @@
-<%- include('../views/head') %>
-<h1 align="center" style="margin-bottom: 1.5em;"><%= title %></h1>
-<div class="container d-flex justify-content-center">
-    <div class="row text-center">
-        <% for(var i=0; i<pastGames.length; i++) {%>
-            <div class="col-sm-3">
-                <div class="card border-secondary bg-light" style="width: 18rem; margin-bottom: 2em;" >
-                    <div class="card-header">
-                        Game <%= pastGames[i].game_number%>: <%= pastGames[i].date.toUTCString().substring(0,17)%>
-                    </div>
-                    <div class="card-body">
-                        <% if (pastGames[i].away_team == "Toronto Maple Leafs") {%>
-                            <img class="card-img-top" style="max-width:35%; max-height: 40%" src="/img/<%=teamLogos[pastGames[i].home_team]%>.png" alt="Card image">
-                            <h5 class="card-title" style="margin-bottom: 0.75em;">@ <%= pastGames[i].home_team%></h5>
-                            <% if (pastGames[i].away_scorers.length > pastGames[i].home_scorers.length) {%>
-                                <% if (pastGames[i].overtime) {%>
-                                    <h5 class="card-title text-success">W/OT <%= pastGames[i].away_scorers.length%> - <%= pastGames[i].home_scorers.length%></h5>
-                                <% } else if (pastGames[i].shootout) {%>
-                                    <h5 class="card-title text-success">W/SO <%= pastGames[i].away_scorers.length%> - <%= pastGames[i].home_scorers.length%></h5>
-                                <% } else {%>   
-                                    <h5 class="card-title text-success">W <%= pastGames[i].away_scorers.length%> - <%= pastGames[i].home_scorers.length%></h5> 
-                                <% } %>   
+<div class="back">
+    <%- include('../views/head') %>
+    <h1 align="center" style="margin-bottom: 1.5em;"><%= title %></h1>
+    <div class="container d-flex justify-content-center">
+        <div class="row text-center">
+            <% for(var i=0; i<pastGames.length; i++) {%>
+                <div class="col-sm-3">
+                    <div class="card border-secondary bg-light" style="width: 18rem; margin-bottom: 2em;" >
+                        <div class="card-header">
+                            Game <%= pastGames[i].game_number%>: <%= pastGames[i].date.toUTCString().substring(0,17)%>
+                        </div>
+                        <div class="card-body">
+                            <% if (pastGames[i].away_team == "Toronto Maple Leafs") {%>
+                                <img class="card-img-top" style="max-width:35%; max-height: 40%" src="/img/<%=teamLogos[pastGames[i].home_team]%>.png" alt="Card image">
+                                <h5 class="card-title" style="margin-bottom: 0.75em;">@ <%= pastGames[i].home_team%></h5>
+                                <% if (pastGames[i].away_scorers.length > pastGames[i].home_scorers.length) {%>
+                                    <% if (pastGames[i].overtime) {%>
+                                        <h5 class="card-title text-success">W/OT <%= pastGames[i].away_scorers.length%> - <%= pastGames[i].home_scorers.length%></h5>
+                                    <% } else if (pastGames[i].shootout) {%>
+                                        <h5 class="card-title text-success">W/SO <%= pastGames[i].away_scorers.length%> - <%= pastGames[i].home_scorers.length%></h5>
+                                    <% } else {%>   
+                                        <h5 class="card-title text-success">W <%= pastGames[i].away_scorers.length%> - <%= pastGames[i].home_scorers.length%></h5> 
+                                    <% } %>   
+                                <% } else {%>
+                                    <% if (pastGames[i].overtime) {%>
+                                        <h5 class="card-title text-danger">L/OT <%= pastGames[i].away_scorers.length%> - <%= pastGames[i].home_scorers.length%></h5>
+                                    <% } else if (pastGames[i].shootout) {%>
+                                        <h5 class="card-title text-danger">L/SO <%= pastGames[i].away_scorers.length%> - <%= pastGames[i].home_scorers.length%></h5>
+                                    <% } else {%>   
+                                        <h5 class="card-title text-danger">L <%= pastGames[i].away_scorers.length%> - <%= pastGames[i].home_scorers.length%></h5>
+                                    <% } %>   
+                                    
+                                <% } %>
                             <% } else {%>
-                                <% if (pastGames[i].overtime) {%>
-                                    <h5 class="card-title text-danger">L/OT <%= pastGames[i].away_scorers.length%> - <%= pastGames[i].home_scorers.length%></h5>
-                                <% } else if (pastGames[i].shootout) {%>
-                                    <h5 class="card-title text-danger">L/SO <%= pastGames[i].away_scorers.length%> - <%= pastGames[i].home_scorers.length%></h5>
-                                <% } else {%>   
-                                    <h5 class="card-title text-danger">L <%= pastGames[i].away_scorers.length%> - <%= pastGames[i].home_scorers.length%></h5>
-                                <% } %>   
-                                
+                                <img class="card-img-top" style="max-width:35%; max-height: 40%" src="/img/<%=teamLogos[pastGames[i].away_team]%>.png" alt="Card image">
+                                <h5 class="card-title" style="margin-bottom: 0.75em;">vs <%= pastGames[i].away_team%></h5>
+                                <% if (pastGames[i].away_scorers.length > pastGames[i].home_scorers.length) {%>
+                                    <% if (pastGames[i].overtime) {%>
+                                        <h5 class="card-title text-danger">L/OT <%= pastGames[i].home_scorers.length%> - <%= pastGames[i].away_scorers.length%></h5>
+                                    <% } else if (pastGames[i].shootout) {%>
+                                        <h5 class="card-title text-danger">L/SO <%= pastGames[i].home_scorers.length%> - <%= pastGames[i].away_scorers.length%></h5>
+                                    <% } else {%>   
+                                        <h5 class="card-title text-danger">L <%= pastGames[i].home_scorers.length%> - <%= pastGames[i].away_scorers.length%></h5>
+                                    <% } %>   
+                                <% } else {%>
+                                    <% if (pastGames[i].overtime) {%>
+                                        <h5 class="card-title text-success">W/OT <%= pastGames[i].home_scorers.length%> - <%= pastGames[i].away_scorers.length%></h5>
+                                    <% } else if (pastGames[i].shootout) {%>
+                                        <h5 class="card-title text-success">W/SO <%= pastGames[i].home_scorers.length%> - <%= pastGames[i].away_scorers.length%></h5>
+                                    <% } else {%>   
+                                        <h5 class="card-title text-success">W <%= pastGames[i].home_scorers.length%> - <%= pastGames[i].away_scorers.length%></h5>
+                                    <% } %>  
+                                <% } %>
                             <% } %>
-                        <% } else {%>
-                            <img class="card-img-top" style="max-width:35%; max-height: 40%" src="/img/<%=teamLogos[pastGames[i].away_team]%>.png" alt="Card image">
-                            <h5 class="card-title" style="margin-bottom: 0.75em;">vs <%= pastGames[i].away_team%></h5>
-                            <% if (pastGames[i].away_scorers.length > pastGames[i].home_scorers.length) {%>
-                                <% if (pastGames[i].overtime) {%>
-                                    <h5 class="card-title text-danger">L/OT <%= pastGames[i].home_scorers.length%> - <%= pastGames[i].away_scorers.length%></h5>
-                                <% } else if (pastGames[i].shootout) {%>
-                                    <h5 class="card-title text-danger">L/SO <%= pastGames[i].home_scorers.length%> - <%= pastGames[i].away_scorers.length%></h5>
-                                <% } else {%>   
-                                    <h5 class="card-title text-danger">L <%= pastGames[i].home_scorers.length%> - <%= pastGames[i].away_scorers.length%></h5>
-                                <% } %>   
-                            <% } else {%>
-                                <% if (pastGames[i].overtime) {%>
-                                    <h5 class="card-title text-success">W/OT <%= pastGames[i].home_scorers.length%> - <%= pastGames[i].away_scorers.length%></h5>
-                                <% } else if (pastGames[i].shootout) {%>
-                                    <h5 class="card-title text-success">W/SO <%= pastGames[i].home_scorers.length%> - <%= pastGames[i].away_scorers.length%></h5>
-                                <% } else {%>   
-                                    <h5 class="card-title text-success">W <%= pastGames[i].home_scorers.length%> - <%= pastGames[i].away_scorers.length%></h5>
-                                <% } %>  
-                            <% } %>
-                        <% } %>
-                        <a href="<%=pastGames[i].highlights%>" target="_blank" class="btn btn-primary">Highlights</a>
+                            <a href="<%=pastGames[i].highlights%>" target="_blank" class="btn btn-primary">Highlights</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            
-        <% } %>
+                
+            <% } %>
+        </div>
     </div>
+    <%- include('../views/footer') %>
 </div>
-<%- include('../views/footer') %>

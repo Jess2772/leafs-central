@@ -51,6 +51,7 @@ var teamLogos = {
 
 // route handler
 app.get('/', async (req, res) => {
+    // TODO: stats page that reads data on all current players on maple leafs, and updates database. Then querydata bas and display all players because then you can sort by most points or something, need to create an object that contains all the stats you want to display. how to overwrite an entry in mongodb
     // DATA FROM LIVE GAMES. CAN YOU SAVE IT? BUT ONLY IF YOURE REPEATEDLY CALLING IT....
     // each time somebody comes to the website just update it to show the live game. guess cant really save it....
     // on game day compare each teams stats? like maple leafs versus their opponent

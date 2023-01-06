@@ -1,96 +1,100 @@
-<div style="background-color: lightblue;">
+<div class="back">
     <%- include('../views/head') %>
     <h1 align="center" style="color: blue;"><%= title %></h1>
-    
-    <p class="text-muted" align="center"><%= teamStats.wins %>-<%= teamStats.losses %>-<%= teamStats.ot %> • <%= standingStats["rank"] %> in Atlantic Division</p>
-    <% if (standingStats["streak"][0] == "W") { %> 
-        <p style="color:green;" align="center"><span style="color: black;"> Current streak:</span> <%= standingStats["streak"] %></p>
-    <% } else { %>
-        <p style="color:red;"align="center"><span style="color: black;"> Current streak:</span> <%= standingStats["streak"] %></p>
-    <% } %>
-    
-    <h2 align="center">Team Statistics</h2>
-    
-    <div class="container" align="center">
-    
-        <body>
-            <p style="color:blue;"> Goals Per Game: <%= teamStats.goalsPerGame.toFixed(2) %> <span style="color:red;">(<%= teamStatsRanking.goalsPerGame %>)</span></p>
-        </body>
-    
-        <body>
-            <p style="color:blue;"> Goals Against Per Game: <%= teamStats.goalsAgainstPerGame.toFixed(2) %> <span style="color:red;">(<%= teamStatsRanking.goalsAgainstPerGame %>)</span></p>
-        </body>
-    
-        <body>
-            <p style="color:blue;"> Power Play Percentage: <%= teamStats.powerPlayPercentage %>% <span style="color:red;">(<%= teamStatsRanking.powerPlayPercentage %>)</span></p>
-        </body>
-    
-        <body>
-            <p style="color:blue;"> Penalty Kill Percentage: <%= teamStats.penaltyKillPercentage %>% <span style="color:red;">(<%= teamStatsRanking.penaltyKillPercentage %>)</span></p>
-        </body>
-    
-        <body>
-            <p style="color:blue;"> Shots Per Game: <%= teamStats.shotsPerGame.toFixed(2) %> <span style="color:red;">(<%= teamStatsRanking.shotsPerGame %>)</span></p>
-        </body>
-    
-        <body>
-            <p style="color:blue;"> Shots Allowed Per Game: <%= teamStats.shotsAllowed.toFixed(2) %> <span style="color:red;">(<%= teamStatsRanking.shotsAllowed %>)</span></p>
-        </body>
-    
-        <body>
-            <p style="color:blue;"> Faceoff Win Percentage: <%= teamStats.faceOffWinPercentage %>% <span style="color:red;">(<%= teamStatsRanking.faceOffWinPercentage %>)</span></p>
-        </body>
-    
-    </div>
-    
-    <div align="center">
-        <% if (isGameDay) { %> 
-            <p> Game Day! </p>
-            <% if (upcomingGames[0].games[0].status.abstractGameState === "Final") { %>
-                <p> Final </p>
-            <% } else if (upcomingGames[0].games[0].status.abstractGameState === "Live") { %>
-                <p> Game is live!</p>
-            <% } %>
+
+    <body>
+        <p class="text-muted" align="center"><%= teamStats.wins %>-<%= teamStats.losses %>-<%= teamStats.ot %> • <%= standingStats["rank"] %> in Atlantic Division</p>
+        <% if (standingStats["streak"][0] == "W") { %> 
+            <p style="color:green;" align="center"><span style="color: black;"> Current streak:</span> <%= standingStats["streak"] %></p>
+        <% } else { %>
+            <p style="color:red;"align="center"><span style="color: black;"> Current streak:</span> <%= standingStats["streak"] %></p>
         <% } %>
-    </div>
-    
-    <h2 align="center" style="margin-bottom: 2.5rem;">Upcoming Games:</h2>
-    
-    <div class="container d-flex justify-content-center">
-        <div class="row text-center" style="width: 100%;">
-            <% for(var i=0; i<4; i++) {%>
-                <%# can define a template for an upcoming game and pass in the fields you need: include('user/show', {user: user}); %>
-                <div class="col-sm-3 d-flex align-items-stretch">
-                    <div class="card bg-light border-secondary" style="height:18rem;">
-                        <div class="card-header">
-                            <%= new Date(upcomingGames[i].date).toUTCString().substring(0,17)%>
-                        </div>
-                        <div class="card-body">
-                            <% if (upcomingGames[i].games[0].teams.away.team.id == 10) {%>
-                                <img class="card-img-top" style="max-width:35%; max-height: 40%" src="/img/<%=teamLogos[upcomingGames[i].games[0].teams.home.team.name]%>.png" alt="Card image">
-                                <div>
-                                    <h5 class="card-title">@ </h5>
-                                    <h5 class="card-title"><%= upcomingGames[i].games[0].teams.home.team.name%></h5>
-                                    <p class="text-muted">(<%=upcomingGames[i].games[0].teams.home.leagueRecord.wins%> - <%=upcomingGames[i].games[0].teams.home.leagueRecord.losses%> - <%=upcomingGames[i].games[0].teams.home.leagueRecord.ot%>) </p>
-                                </div>
-                                
-                            <% } else {%>
-                                <img class="card-img-top" style="max-width:35%; max-height: 40%" src="/img/<%=teamLogos[upcomingGames[i].games[0].teams.away.team.name]%>.png" alt="Card image" style="width:100%">
-                                <div>
-                                    <h5 class="card-title">vs </h5>
-                                    <h5 class="card-title"><%= upcomingGames[i].games[0].teams.away.team.name%></h5>
-                                    <p class="text-muted">(<%=upcomingGames[i].games[0].teams.away.leagueRecord.wins%> - <%=upcomingGames[i].games[0].teams.away.leagueRecord.losses%> - <%=upcomingGames[i].games[0].teams.away.leagueRecord.ot%>) </p>
-                                </div>
-                            <% } %>
-                        </div>
-                        <div class="card-footer text-muted" style="position:absolute; bottom:0; width:100%">
-                            <%= upcomingGames[i].games[0].venue.name%>
-                        </div>
-                    </div>
-                </div>
-                
+        
+        <h2 align="center">Team Statistics</h2>
+        
+        <div class="container" align="center">
+        
+            <body>
+                <p style="color:blue;"> Goals Per Game: <%= teamStats.goalsPerGame.toFixed(2) %> <span style="color:red;">(<%= teamStatsRanking.goalsPerGame %>)</span></p>
+            </body>
+        
+            <body>
+                <p style="color:blue;"> Goals Against Per Game: <%= teamStats.goalsAgainstPerGame.toFixed(2) %> <span style="color:red;">(<%= teamStatsRanking.goalsAgainstPerGame %>)</span></p>
+            </body>
+        
+            <body>
+                <p style="color:blue;"> Power Play Percentage: <%= teamStats.powerPlayPercentage %>% <span style="color:red;">(<%= teamStatsRanking.powerPlayPercentage %>)</span></p>
+            </body>
+        
+            <body>
+                <p style="color:blue;"> Penalty Kill Percentage: <%= teamStats.penaltyKillPercentage %>% <span style="color:red;">(<%= teamStatsRanking.penaltyKillPercentage %>)</span></p>
+            </body>
+        
+            <body>
+                <p style="color:blue;"> Shots Per Game: <%= teamStats.shotsPerGame.toFixed(2) %> <span style="color:red;">(<%= teamStatsRanking.shotsPerGame %>)</span></p>
+            </body>
+        
+            <body>
+                <p style="color:blue;"> Shots Allowed Per Game: <%= teamStats.shotsAllowed.toFixed(2) %> <span style="color:red;">(<%= teamStatsRanking.shotsAllowed %>)</span></p>
+            </body>
+        
+            <body>
+                <p style="color:blue;"> Faceoff Win Percentage: <%= teamStats.faceOffWinPercentage %>% <span style="color:red;">(<%= teamStatsRanking.faceOffWinPercentage %>)</span></p>
+            </body>
+        
+        </div>
+        
+        <div align="center">
+            <% if (isGameDay) { %> 
+                <p> Game Day! </p>
+                <% if (upcomingGames[0].games[0].status.abstractGameState === "Final") { %>
+                    <p> Final </p>
+                <% } else if (upcomingGames[0].games[0].status.abstractGameState === "Live") { %>
+                    <p> Game is live!</p>
+                <% } %>
             <% } %>
         </div>
-    </div>
+        
+        <h2 align="center" style="margin-bottom: 2.5rem;">Upcoming Games:</h2>
+        
+        <div class="container d-flex justify-content-center">
+            <div class="row text-center" style="width: 100%;">
+                <% for(var i=0; i<4; i++) {%>
+                    <%# can define a template for an upcoming game and pass in the fields you need: include('user/show', {user: user}); %>
+                    <div class="col-sm-3 d-flex align-items-stretch">
+                        <div class="card bg-light border-secondary" style="height:18rem;">
+                            <div class="card-header">
+                                <%= new Date(upcomingGames[i].date).toUTCString().substring(0,17)%>
+                            </div>
+                            <div class="card-body">
+                                <% if (upcomingGames[i].games[0].teams.away.team.id == 10) {%>
+                                    <img class="card-img-top" style="max-width:35%; max-height: 40%" src="/img/<%=teamLogos[upcomingGames[i].games[0].teams.home.team.name]%>.png" alt="Card image">
+                                    <div>
+                                        <h5 class="card-title">@ </h5>
+                                        <h5 class="card-title"><%= upcomingGames[i].games[0].teams.home.team.name%></h5>
+                                        <p class="text-muted">(<%=upcomingGames[i].games[0].teams.home.leagueRecord.wins%> - <%=upcomingGames[i].games[0].teams.home.leagueRecord.losses%> - <%=upcomingGames[i].games[0].teams.home.leagueRecord.ot%>) </p>
+                                    </div>
+                                    
+                                <% } else {%>
+                                    <img class="card-img-top" style="max-width:35%; max-height: 40%" src="/img/<%=teamLogos[upcomingGames[i].games[0].teams.away.team.name]%>.png" alt="Card image" style="width:100%">
+                                    <div>
+                                        <h5 class="card-title">vs </h5>
+                                        <h5 class="card-title"><%= upcomingGames[i].games[0].teams.away.team.name%></h5>
+                                        <p class="text-muted">(<%=upcomingGames[i].games[0].teams.away.leagueRecord.wins%> - <%=upcomingGames[i].games[0].teams.away.leagueRecord.losses%> - <%=upcomingGames[i].games[0].teams.away.leagueRecord.ot%>) </p>
+                                    </div>
+                                <% } %>
+                            </div>
+                            <div class="card-footer text-muted" style="position:absolute; bottom:0; width:100%">
+                                <%= upcomingGames[i].games[0].venue.name%>
+                            </div>
+                        </div>
+                    </div>
+                    
+                <% } %>
+            </div>
+        </div>
+    </body>
+    
+
     <%- include('../views/footer') %>
 </div>
