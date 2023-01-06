@@ -36,6 +36,7 @@ var teamLogos = {
     "New York Islanders": "islanders",
     "New York Rangers": "rangers",
     "Minnesota Wild": "wild",
+    "Nashville Predators": "predators",
     "Ottawa Senators": "senators",
     "Philadelphia Flyers": "flyers",
     "Pittsburgh Penguins": "penguins",
