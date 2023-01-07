@@ -3,6 +3,10 @@ const async = require('async')
 var moment = require('moment'); // require
 moment().format(); 
 
+const Player = require('../models/player');
+const PlayerStatistics = require('../models/playerStatistics');
+const queries = require('../queries')
+
 async function getTeamStats(team_id) {
   var TEAM_STATS_ENDPOINT = `https://statsapi.web.nhl.com/api/v1/teams/${team_id}/stats`;
   var rsp = await axios.get(
@@ -12,6 +16,65 @@ async function getTeamStats(team_id) {
       params: { trophies: true } 
     });
     return rsp.data;
+}
+
+async function updateCurrentRoster(team_id) {
+  var PLAYER_ENDPOINT = `https://statsapi.web.nhl.com/api/v1/teams/${team_id}/roster`
+  var rsp = await axios.get(
+    PLAYER_ENDPOINT, 
+    { 
+      headers: { Accept: 'application/json', 'Accept-Encoding': 'identity' }, 
+      params: { trophies: true } 
+    });
+  rsp = rsp.data
+  currentRoster = rsp.roster;
+  for (let i = 0; i < currentRoster.length; i++) {
+      const player = new Player({
+          _id: currentRoster[i].person.id,
+          name: currentRoster[i].person.fullName,
+          number: currentRoster[i].jerseyNumber,
+          position: currentRoster[i].position.abbreviation
+      });
+      player.save();
+  }
+}
+
+async function updatePlayerStatistics() {
+  var players = await queries.findCurrentPlayers()
+  for (let i = 0; i < players.length; i++) {
+    var player_id = players[i]._id;
+    var PLAYER_ENDPOINT = `https://statsapi.web.nhl.com/api/v1/people/${player_id}/stats?stats=statsSingleSeason&season=20222023`
+    var rsp = await axios.get(
+      PLAYER_ENDPOINT, 
+      { 
+        headers: { Accept: 'application/json', 'Accept-Encoding': 'identity' }, 
+        params: { trophies: true } 
+      });
+    statLine = rsp.data.stats[0].splits[0].stat
+    const playerStat = new PlayerStatistics({
+      _id: player_id,
+      games_played: statLine.games,
+      goals: statLine.goals,
+      assists: statLine.assists,
+      points: statLine.points,
+      plus_minus: statLine.plusMinus,
+      shots_on_goal: statLine.shots,
+      shooting_percentage: statLine.shotPct,
+      game_winning_goals: statLine.gameWinningGoals,
+      power_play_goals: statLine.powerPlayGoals,
+      power_play_assists: statLine.powerPlayPoints - statLine.powerPlayGoals,
+      short_handed_goals: statLine.shortHandedGoals,
+      short_handed_assists: statLine.shortHandedPoints - statLine.shortHandedGoals,
+      hits: statLine.hits,
+      blocked_shots: statLine.blocked,
+      faceoff_percentage: statLine.faceOffPct,
+      average_toi: statLine.timeOnIcePerGame,
+      average_pp_toi: statLine.powerPlayTimeOnIcePerGame,
+      average_sh_toi: statLine.shortHandedTimeOnIcePerGame
+    });
+    const query = { _id: player_id };
+    playerStat.replaceOne(query, playerStat);
+  }
 }
 
 async function findBoxScoreByGameId(game_id) {
@@ -105,15 +168,14 @@ function formatDate(date) {
 
 
 // save all important data from a game into database, let the user query?
-
-
-
-  module.exports = {
-    getTeamStats,
-    findBoxScoreByGameId,
-    findUpcomingGames,
-    getStandingStats,
-    isGameDay,
-    formatDate,
-    padTo2Digits
-  }
+module.exports = {
+  getTeamStats,
+  updateCurrentRoster,
+  updatePlayerStatistics,
+  findBoxScoreByGameId,
+  findUpcomingGames,
+  getStandingStats,
+  isGameDay,
+  formatDate,
+  padTo2Digits
+}

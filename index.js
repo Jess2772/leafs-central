@@ -13,6 +13,7 @@ const nhl_service = require('./logic/nhlservice');
 const queries = require('./queries')
 const Game = require('./models/game');
 
+
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
@@ -103,6 +104,15 @@ app.get('/pastGames', async (req, res) => {
             teamLogos: teamLogos
         }
     );
+});
+
+app.get('/setPlayers', async (req, res) => {
+    var currentRoster = await nhl_service.updateCurrentRoster(10);
+});
+
+app.get('/statistics', async (req, res) => {
+    var playerStatistics = await nhl_service.updatePlayerStatistics(10);
+    console.log(await queries.getPlayersByPointsDescending());
 });
 
 

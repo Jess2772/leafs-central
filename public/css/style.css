@@ -1,0 +1,21 @@
+.back {
+    background: linear-gradient(to right bottom, lightblue, rgb(38, 127, 171));
+}
+
+h1 {
+    text-align: center;
+    color: blue;
+}
+
+h2 {
+    text-align: center;
+}
+
+.card-img-top {
+    max-width:35%;
+    max-height: 40%;
+}
+
+.card-title {
+    margin-bottom: 0.75em;
+}

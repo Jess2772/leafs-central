@@ -1,8 +1,8 @@
 <div class="back">
     <%- include('../views/head') %>
-    <h1 align="center" style="color: blue;"><%= title %></h1>
+    <h1><%= title %></h1>
 
-    <body>
+    <body text-align="center">
         <p class="text-muted" align="center"><%= teamStats.wins %>-<%= teamStats.losses %>-<%= teamStats.ot %> • <%= standingStats["rank"] %> in Atlantic Division</p>
         <% if (standingStats["streak"][0] == "W") { %> 
             <p style="color:green;" align="center"><span style="color: black;"> Current streak:</span> <%= standingStats["streak"] %></p>
@@ -10,10 +10,9 @@
             <p style="color:red;"align="center"><span style="color: black;"> Current streak:</span> <%= standingStats["streak"] %></p>
         <% } %>
         
-        <h2 align="center">Team Statistics</h2>
+        <h2>Team Statistics</h2>
         
         <div class="container" align="center">
-        
             <body>
                 <p style="color:blue;"> Goals Per Game: <%= teamStats.goalsPerGame.toFixed(2) %> <span style="color:red;">(<%= teamStatsRanking.goalsPerGame %>)</span></p>
             </body>
@@ -55,7 +54,7 @@
             <% } %>
         </div>
         
-        <h2 align="center" style="margin-bottom: 2.5rem;">Upcoming Games:</h2>
+        <h2 style="margin-bottom: 2.5rem;">Upcoming Games:</h2>
         
         <div class="container d-flex justify-content-center">
             <div class="row text-center" style="width: 100%;">
