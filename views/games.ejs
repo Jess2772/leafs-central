@@ -1,6 +1,6 @@
 <div style="background: linear-gradient(to right bottom, lightblue, rgb(38, 127, 171));">
     <%- include('../views/head') %>
-    <h1><%= title %></h1>
+    <h1 style="text-align: center; style="color: blue;"><%= title %></h1>
 
     <body text-align="center">
         <p class="text-muted" align="center"><%= teamStats.wins %>-<%= teamStats.losses %>-<%= teamStats.ot %> • <%= standingStats["rank"] %> in Atlantic Division</p>
@@ -10,7 +10,7 @@
             <p style="color:red;"align="center"><span style="color: black;"> Current streak:</span> <%= standingStats["streak"] %></p>
         <% } %>
         
-        <h2>Team Statistics</h2>
+        <h2 style="text-align: center;">Team Statistics</h2>
         
         <div class="container" align="center">
             <body>
@@ -54,7 +54,7 @@
             <% } %>
         </div>
         
-        <h2 style="margin-bottom: 2.5rem;">Upcoming Games:</h2>
+        <h2 style="text-align: center; margin-bottom: 2.5rem;">Upcoming Games:</h2>
         
         <div class="container d-flex justify-content-center">
             <div class="row text-center" style="width: 100%;">
