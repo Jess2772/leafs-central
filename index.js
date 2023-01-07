@@ -12,6 +12,7 @@ db.on("error", console.error.bind(console, "MongoDB connection error:"));
 const nhl_service = require('./logic/nhlservice');
 const queries = require('./queries')
 const Game = require('./models/game');
+const player = require('./models/player');
 
 
 app.set("views", path.join(__dirname, "views"));
@@ -111,8 +112,21 @@ app.get('/setPlayers', async (req, res) => {
 });
 
 app.get('/statistics', async (req, res) => {
-    var playerStatistics = await nhl_service.updatePlayerStatistics(10);
-    console.log(await queries.getPlayersByPointsDescending());
+    var playerDict = {};
+    var playerInfo = await queries.findCurrentPlayers();
+    for (let i = 0; i < playerInfo.length; i++) {
+        playerDict[playerInfo[i]._id] = playerInfo[i]
+    }
+    console.log(playerDict)
+    await nhl_service.updatePlayerStatistics();
+    var playerStatistics = await queries.getPlayersByPointsDescending();
+    res.render('players.ejs', {
+        title:"Statistics", 
+        playerInfo:playerInfo,
+        playerDict: playerDict,
+        playerStatistics, playerStatistics
+    }
+);
 });
 
 

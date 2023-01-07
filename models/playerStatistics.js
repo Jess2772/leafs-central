@@ -11,6 +11,7 @@ const playerStatsSchema = new Schema({
     points: {type: Number, required: true},
     plus_minus: {type: Number, required: true},
     shots_on_goal: {type: Number, required: true},
+    penalty_minutes: {type: Number, required: true},
     shooting_percentage: {type: Number, required: true},
     game_winning_goals: {type: Number, required: true},
     power_play_goals: {type: Number, required: true},

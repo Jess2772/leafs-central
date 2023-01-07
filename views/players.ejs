@@ -1,1 +1,53 @@
-// only if its game day then update the stats for players.
+<div class="back">
+    <%- include('../views/head') %>
+    <div class="container">
+        <table class="table table-secondary center">
+            <thead>
+              <tr>
+                <th scope="col">Player</th>
+                <th scope="col">GP</th>
+                <th scope="col">G</th>
+                <th scope="col">A</th>
+                <th scope="col" class="bg-secondary">P</th>
+                <th scope="col">+/-</th>
+                <th scope="col">PIM</th>
+                <th scope="col">SOG</th>
+                <th scope="col">S%</th>
+                <th scope="col">GWG</th>
+                <th scope="col">PPG</th>
+                <th scope="col">PPA</th>
+                <th scope="col">H</th>
+                <th scope="col">BS</th>
+                <th scope="col">FO%</th>
+                <th scope="col">TOI</th>
+    
+              </tr>
+            </thead>
+            <tbody>
+                <% for(var i=0; i<playerStatistics.length; i++) {%>
+                    <tr>
+                        <td><%= playerDict[playerStatistics[i]._id].name%>, <%=playerDict[playerStatistics[i]._id].position%></td>
+                        <td><%= playerStatistics[i].games_played%></td>
+                        <td><%= playerStatistics[i].goals%></td>
+                        <td><%= playerStatistics[i].assists%></td>
+                        <td class="bg-secondary"><%= playerStatistics[i].points%></td>
+                        <td><%= playerStatistics[i].plus_minus%></td>
+                        <td><%= playerStatistics[i].penalty_minutes%></td>
+                        <td><%= playerStatistics[i].shots_on_goal%></td>
+                        <td><%= playerStatistics[i].shooting_percentage%>%</td>
+                        <td><%= playerStatistics[i].game_winning_goals%></td>
+                        <td><%= playerStatistics[i].power_play_goals%></td>
+                        <td><%= playerStatistics[i].power_play_assists%></td>
+                        <td><%= playerStatistics[i].hits%></td>
+                        <td><%= playerStatistics[i].blocked_shots%></td>
+                        <td><%= parseFloat(playerStatistics[i].faceoff_percentage).toFixed(1)%>%</td>
+                        <td><%= playerStatistics[i].average_toi%></td>
+    
+                    </tr>
+                <% } %>
+            </tbody>
+          </table>
+    </div>
+
+    <%- include('../views/footer') %>
+</div>

@@ -61,6 +61,7 @@ async function updatePlayerStatistics() {
       shots_on_goal: statLine.shots,
       shooting_percentage: statLine.shotPct,
       game_winning_goals: statLine.gameWinningGoals,
+      penalty_minutes: statLine.penaltyMinutes,
       power_play_goals: statLine.powerPlayGoals,
       power_play_assists: statLine.powerPlayPoints - statLine.powerPlayGoals,
       short_handed_goals: statLine.shortHandedGoals,

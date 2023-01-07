@@ -11,6 +11,19 @@ h2 {
     text-align: center;
 }
 
+
+th {
+    text-align: center;
+}
+
+td {
+    text-align: center;
+}
+
+table {
+    border-collapse: collapse;
+}
+
 .card-img-top {
     max-width:35%;
     max-height: 40%;
@@ -19,3 +32,13 @@ h2 {
 .card-title {
     margin-bottom: 0.75em;
 }
+
+.center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.highlight {
+   background: #cc2f2f;
+}
+
