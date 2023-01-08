@@ -1,6 +1,21 @@
-<div style="background: linear-gradient(to right bottom, lightblue, rgb(38, 127, 171))";>
+<div style="background: linear-gradient(to right bottom, lightblue, rgb(38, 127, 171)); min-height: 100vh;">
     <%- include('../views/head') %>
+    
     <div class="container">
+        <div class="dropdown">
+            <h1>STATISTICS</h1>
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                Dropdown button
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li><a class="dropdown-item" href="/statistics">Skaters</a></li>
+                <li><a class="dropdown-item" href="/statistics/forwards/">Forwards</a></li>
+                <li><a class="dropdown-item" href="/statistics/defense/">Defense</a></li>
+                <li><a class="dropdown-item" href="/statistics/goalies/">Goalies</a></li>
+            </ul>
+        </div>
+
+        <h2><%= title %></h2>
         <table class="table table-secondary center">
             <thead>
               <tr>
@@ -48,6 +63,8 @@
             </tbody>
           </table>
     </div>
+
+    
 
     <%- include('../views/footer') %>
 </div>

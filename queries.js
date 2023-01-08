@@ -33,12 +33,46 @@ async function getPlayersByPointsDescending() {
     return result;
 }
 
+async function getForwardsIds() {
+    var forwards = ["LW", "C", "RW"]
+    var query = { "position" : { "$in": forwards } };
+    var mysort = { points : -1 };
+    var players = Player.find(query, {_id: 1}).sort(mysort);
+    var forwardIds = await players.exec();
+    return forwardIds;
+}
 
+async function getDefenseIds() {
+    var query = { "position" : "D" };
+    var mysort = { points : -1 };
+    var players = Player.find(query, {_id: 1}).sort(mysort);
+    var forwardIds = await players.exec();
+    return forwardIds;
+}
 
+async function getForwardsByPointsDescending() {
+    var forwardIds = await getForwardsIds();
+    var mysort = { points : -1 };
+    var query = { "_id" : { "$in": forwardIds } };
+    var players = PlayerStatistics.find(query).sort(mysort);
+    var result = await players.exec();
+    return result;
+}
+
+async function getDefenseByPointsDescending() {
+    var defenseIds = await getDefenseIds();
+    var mysort = { points : -1 };
+    var query = { "_id" : { "$in": defenseIds } };
+    var players = PlayerStatistics.find(query).sort(mysort);
+    var result = await players.exec();
+    return result;
+}
 
 module.exports = {
     findGameById,
     findAllPlayedGames,
     findCurrentPlayers,
-    getPlayersByPointsDescending
+    getPlayersByPointsDescending,
+    getForwardsByPointsDescending,
+    getDefenseByPointsDescending
 }

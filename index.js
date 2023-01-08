@@ -111,24 +111,54 @@ app.get('/setPlayers', async (req, res) => {
     var currentRoster = await nhl_service.updateCurrentRoster(10);
 });
 
-app.get('/statistics', async (req, res) => {
+app.get('/statistics/:position', async (req, res) => {
+    var position = req.params.position;
     var playerDict = {};
     var playerInfo = await queries.findCurrentPlayers();
     for (let i = 0; i < playerInfo.length; i++) {
         playerDict[playerInfo[i]._id] = playerInfo[i]
     }
-    console.log(playerDict)
-    await nhl_service.updatePlayerStatistics();
-    var playerStatistics = await queries.getPlayersByPointsDescending();
-    res.render('players.ejs', {
-        title:"Statistics", 
-        playerInfo:playerInfo,
-        playerDict: playerDict,
-        playerStatistics, playerStatistics
+    var isGameDay = await nhl_service.isGameDay();
+    if (isGameDay) {
+        await nhl_service.updatePlayerStatistics();
     }
-);
+    if (position == "forwards") {
+        var playerStatistics = await queries.getForwardsByPointsDescending();
+        var title = "FORWARDS";
+    } else if (position == "defense") {
+        var playerStatistics = await queries.getDefenseByPointsDescending();
+        var title = "DEFENSE";
+    } else if (position == "skaters") {
+        var playerStatistics = await queries.getPlayersByPointsDescending();
+        var title = "SKATERS";
+    }
+    
+    res.render('players.ejs', {
+        title: title, 
+        playerInfo: playerInfo,
+        playerDict: playerDict,
+        playerStatistics: playerStatistics
+    });
 });
 
+// app.get('/statistics/defense', async (req, res) => {
+//     var playerDict = {};
+//     var playerInfo = await queries.findCurrentPlayers();
+//     for (let i = 0; i < playerInfo.length; i++) {
+//         playerDict[playerInfo[i]._id] = playerInfo[i]
+//     }
+//     var isGameDay = await nhl_service.isGameDay();
+//     if (isGameDay) {
+//         await nhl_service.updatePlayerStatistics();
+//     }
+//     var playerStatistics = await queries.getDefenseByPointsDescending();
+//     res.render('players.ejs', {
+//         title: "Defense", 
+//         playerInfo: playerInfo,
+//         playerDict: playerDict,
+//         playerStatistics: playerStatistics
+//     });
+// });
 
 const port = process.env.PORT || 8081;
 app.listen(port, () => console.log(`Listening on port ${port}`))
