@@ -73,8 +73,9 @@ async function updatePlayerStatistics() {
       average_pp_toi: statLine.powerPlayTimeOnIcePerGame,
       average_sh_toi: statLine.shortHandedTimeOnIcePerGame
     });
-    const query = { _id: player_id };
-    playerStat.replaceOne(query, playerStat);
+
+    const query = { "_id": player_id };
+    await PlayerStatistics.updateOne(query, {$set: playerStat}, {upsert: true});
   }
 }
 
