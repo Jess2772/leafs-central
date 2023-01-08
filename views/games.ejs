@@ -70,7 +70,7 @@
                                     <img class="card-img-top" style="max-width:35%; max-height: 40%" src="/img/<%=teamLogos[upcomingGames[i].games[0].teams.home.team.name]%>.png" alt="Card image">
                                     <div>
                                         <h5 class="card-title">@ </h5>
-                                        <h5 class="card-title"><%= upcomingGames[i].games[0].teams.home.team.name%></h5>
+                                        <h5 class="card-title" style="margin-bottom: 0.5em"><%= upcomingGames[i].games[0].teams.home.team.name%></h5>
                                         <p class="text-muted">(<%=upcomingGames[i].games[0].teams.home.leagueRecord.wins%> - <%=upcomingGames[i].games[0].teams.home.leagueRecord.losses%> - <%=upcomingGames[i].games[0].teams.home.leagueRecord.ot%>) </p>
                                     </div>
                                     
@@ -78,7 +78,7 @@
                                     <img class="card-img-top" style="max-width:35%; max-height: 40%" src="/img/<%=teamLogos[upcomingGames[i].games[0].teams.away.team.name]%>.png" alt="Card image" style="width:100%">
                                     <div>
                                         <h5 class="card-title">vs </h5>
-                                        <h5 class="card-title"><%= upcomingGames[i].games[0].teams.away.team.name%></h5>
+                                        <h5 class="card-title" style="margin-bottom: 0.5em"><%= upcomingGames[i].games[0].teams.away.team.name%></h5>
                                         <p class="text-muted">(<%=upcomingGames[i].games[0].teams.away.leagueRecord.wins%> - <%=upcomingGames[i].games[0].teams.away.leagueRecord.losses%> - <%=upcomingGames[i].games[0].teams.away.leagueRecord.ot%>) </p>
                                     </div>
                                 <% } %>

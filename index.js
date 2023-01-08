@@ -141,24 +141,6 @@ app.get('/statistics/:position', async (req, res) => {
     });
 });
 
-// app.get('/statistics/defense', async (req, res) => {
-//     var playerDict = {};
-//     var playerInfo = await queries.findCurrentPlayers();
-//     for (let i = 0; i < playerInfo.length; i++) {
-//         playerDict[playerInfo[i]._id] = playerInfo[i]
-//     }
-//     var isGameDay = await nhl_service.isGameDay();
-//     if (isGameDay) {
-//         await nhl_service.updatePlayerStatistics();
-//     }
-//     var playerStatistics = await queries.getDefenseByPointsDescending();
-//     res.render('players.ejs', {
-//         title: "Defense", 
-//         playerInfo: playerInfo,
-//         playerDict: playerDict,
-//         playerStatistics: playerStatistics
-//     });
-// });
 
 const port = process.env.PORT || 8081;
 app.listen(port, () => console.log(`Listening on port ${port}`))
