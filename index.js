@@ -120,7 +120,6 @@ app.get('/statistics/:position', async (req, res) => {
     }
     var isGameDay = await nhl_service.isGameDay();
     if (isGameDay) {
-        console.log("UPDATING STATISTICS")
         await nhl_service.updatePlayerStatistics();
     }
     if (position == "forwards") {

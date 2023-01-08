@@ -1,6 +1,7 @@
-<div style="background: linear-gradient(to right bottom, lightblue, rgb(38, 127, 171));">
+<div style="background: linear-gradient(to right bottom, lightblue, rgb(38, 127, 171)); min-height: 100vh;">
     <%- include('../views/head') %>
-    <h1 style="text-align: center; style="color: blue;"><%= title %></h1>
+
+    <h1 style="text-align: center;"><%= title %></h1>
 
     <body text-align="center">
         <p class="text-muted" align="center"><%= teamStats.wins %>-<%= teamStats.losses %>-<%= teamStats.ot %> • <%= standingStats["rank"] %> in Atlantic Division</p>
@@ -97,3 +98,5 @@
 
     <%- include('../views/footer') %>
 </div>
+
+    

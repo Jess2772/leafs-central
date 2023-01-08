@@ -27,3 +27,22 @@ table {
 .highlight {
    background: #cc2f2f;
 }
+
+.faded {
+    /* The image used */
+    background-image: url("/img/scotiabankarena.jpeg");
+    max-width:100vw;
+    height:auto;
+    /* Add the blur effect */
+    backdrop-filter: blur(8px);
+    -webkit-filter: blur(8px);
+    position: absolute;
+    z-index: -1;
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}

@@ -167,8 +167,6 @@ function formatDate(date) {
   );
 }
 
-
-
 // save all important data from a game into database, let the user query?
 module.exports = {
   getTeamStats,
