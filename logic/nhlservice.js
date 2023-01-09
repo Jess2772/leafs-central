@@ -95,7 +95,6 @@ async function findUpcomingGames() {
   var TWO_WEEKS = 14;
   var SCHEDULE_ENDPOINT = 'https://statsapi.web.nhl.com/api/v1/schedule';
   var currentDate = new Date();
-  currentDate.setHours(currentDate.getHours() - 5);
   var twoWeeksLater = new Date();
 
   twoWeeksLater.setDate(currentDate.getDate() + TWO_WEEKS);
