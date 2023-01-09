@@ -46,6 +46,7 @@ var teamLogos = {
     "Seattle Kraken": "kraken",
     "St. Louis Blues": "blues",
     "Tampa Bay Lightning": "lightning",
+    "Toronto Maple Leafs": "leafs",
     "Vancouver Canucks": "canucks",
     "Washington Capitals": "capitals",
     "Winnipeg Jets": "jets"
@@ -71,6 +72,11 @@ app.get('/', async (req, res) => {
     var standingStats = await nhl_service.getStandingStats();
 
     var isGameDay = await nhl_service.isGameDay();
+    var todaysGame = null;
+    if (isGameDay) {
+        var gameId = upcomingGames[0].games[0].gamePk;
+        todaysGame = await nhl_service.getBoxScoreForGameId(gameId);
+    }
 
     var currentDate = new Date();
     currentDate = nhl_service.formatDate(currentDate)
@@ -83,7 +89,8 @@ app.get('/', async (req, res) => {
             currentDate: currentDate,
             standingStats: standingStats,
             isGameDay: isGameDay,
-            teamLogos: teamLogos
+            teamLogos: teamLogos,
+            todaysGame: todaysGame
         }
     );
     

@@ -152,6 +152,33 @@ async function isGameDay() {
   return false;
 }
 
+async function getBoxScoreForGameId(gameId) {
+  var BOX_SCORE_ENDPOINT = `https://statsapi.web.nhl.com/api/v1/game/${gameId}/boxscore`
+  var rsp = await axios.get(
+    BOX_SCORE_ENDPOINT, 
+      { 
+        headers: { Accept: 'application/json', 'Accept-Encoding': 'identity' }, 
+        params: { trophies: true } 
+      }
+  );
+  var boxscore = rsp.data;
+  return boxscore;
+  /*            "teamStats": {
+                "teamSkaterStats": {
+                    "goals": 0,
+                    "pim": 9,
+                    "shots": 24,
+                    "powerPlayPercentage": "0.0",
+                    "powerPlayGoals": 0.0,
+                    "powerPlayOpportunities": 0.0,
+                    "faceOffWinPercentage": "27.6",
+                    "blocked": 9,
+                    "takeaways": 4,
+                    "giveaways": 1,
+                    "hits": 26
+                }
+            }*/
+}
 
 function padTo2Digits(num) {
   return num.toString().padStart(2, '0');
@@ -175,6 +202,7 @@ module.exports = {
   findBoxScoreByGameId,
   findUpcomingGames,
   getStandingStats,
+  getBoxScoreForGameId,
   isGameDay,
   formatDate,
   padTo2Digits
