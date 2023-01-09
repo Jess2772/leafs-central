@@ -31,6 +31,7 @@ var teamLogos = {
     "Dallas Stars": "stars",
     "Detroit Red Wings": "redwings",
     "Edmonton Oilers": "oilers",
+    "Florida Panthers": "panthers",
     "Vegas Golden Knights": "goldenknights",
     "Los Angeles Kings": "kings",
     "Montreal Canadiens": "canadiens",
