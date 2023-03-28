@@ -4,7 +4,7 @@
     <h1 style="text-align: center;"><%= title %></h1>
 
     <body text-align="center">
-        <p class="text-muted" align="center"><%= teamStats.wins %>-<%= teamStats.losses %>-<%= teamStats.ot %> • <%= standingStats["rank"] %> in Atlantic Division</p>
+        <p class="text-muted" align="center"><%= teamStats.wins %>-<%= teamStats.losses %>-<%= teamStats.ot %> (<%= teamStats.wins*2 + teamStats.ot%> pts) • <%= standingStats["rank"] %> in Atlantic Division</p>
         <% if (standingStats["streak"][0] == "W") { %> 
             <p style="color:green;" align="center"><span style="color: black;"> Current streak:</span> <%= standingStats["streak"] %></p>
         <% } else { %>
