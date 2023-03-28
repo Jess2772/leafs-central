@@ -28,6 +28,8 @@ var teamLogos = {
     "Calgary Flames": "flames",
     "Carolina Hurricanes": "hurricanes",
     "Chicago Blackhawks": "blackhawks",
+    "Colorado Avalance": "avalanche",
+    "Columbus Blue Jackets": "bluejackets",
     "Dallas Stars": "stars",
     "Detroit Red Wings": "redwings",
     "Edmonton Oilers": "oilers",
